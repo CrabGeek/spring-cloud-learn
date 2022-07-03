@@ -1,0 +1,44 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: microServiceCloudProviderDept  #微服务名称，对外暴漏的微服务名称，十分重要
+################################################## JDBC 通用配置  ##########################################
+  datasource:
+    username: root
+    password: Xgp199833
+    url: jdbc:mysql:///spring_cloud_demo
+    driver-class-name: com.mysql.jdbc.Driver
+############################### 不检查 spring.config.import=configserver:##################
+#  cloud:
+#    config:
+#      enabled: false
+mybatis:
+  # 指定 mapper.xml的位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  #扫描实体类的位置,在此处指明扫描实体类的包，在 mapper.xml 中就可以不写实体类的全路径名
+  type-aliases-package: com.crabgeek.entity
+  configuration:
+    #默认开启驼峰命名法，可以不用设置该属性
+    map-underscore-to-camel-case: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka, http://eureka7003.com:7003/eureka
+  instance:
+    instance-id: spring-cloud-prvider-8001 #自定义服务名称信息
+    prefer-ip-address: true #显示访问路径的 ip 地址
+
+########################################## spring cloud 使用 Spring Boot actuator 监控完善信息###################################
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app.name: micro-service-cloud-provider-dept
+  company.name: com.crabgeek
+  build.setifactId: @project.artifactId@
+  build.version: @project.version@

@@ -19,5 +19,6 @@ import java.io.Serializable;
 public class Dept implements Serializable {
     private Integer deptNo;
     private String deptName;
+    private String dbSource;
 
 }
